@@ -1,0 +1,36 @@
+﻿<Window x:Class="ViewMain.View.ElectronicsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ViewMain.View"
+        xmlns:controls="clr-namespace:ViewMain"
+        mc:Ignorable="d"
+        Title="ElectronicsWindow" Height="450" Width="800">
+    <Grid>
+
+        <StackPanel>
+            <DataGrid ItemsSource="{Binding Products}"
+              SelectedItem="{Binding SelectedProduct}"
+              AutoGenerateColumns="False" Margin="10">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Описание" Binding="{Binding Description}" />
+                    <DataGridTextColumn Header="Цена" Binding="{Binding Cost}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Text="Название:" />
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+            <TextBlock Text="Описание:" />
+            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+            <TextBlock Text="Цена:" />
+            <TextBox Text="{Binding Cost, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+
+            
+            <controls:ProductControl />
+            
+        </StackPanel>
+
+    </Grid>
+</Window>

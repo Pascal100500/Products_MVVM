@@ -26,13 +26,13 @@ namespace ViewMain
         private void OpenElectronicsWindow(object sender, RoutedEventArgs e)
         {
             var electronicsWindow = new View.ElectronicsWindow();
-            electronicsWindow.Show();
+            electronicsWindow.ShowDialog(); // Чтобы главное окно было неактивным, когда открыто окно с электроникой
         }
 
         private void OpenVegetableWindow(object sender, RoutedEventArgs e)
         {
             var vegetableWindow = new View.VegetableWindow();
-            vegetableWindow.Show();
+            vegetableWindow.ShowDialog(); // Чтобы главное окно было неактивным, когда открыто окно с овощами
         }
     }
 }

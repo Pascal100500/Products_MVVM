@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ViewMain.Model;
 using ViewMain.ViewModel;
 
 namespace ViewMain.View
@@ -20,10 +21,47 @@ namespace ViewMain.View
     /// </summary>
     public partial class ElectronicsWindow : Window
     {
+        private readonly ProductViewModel _viewModel;
         public ElectronicsWindow()
         {
             InitializeComponent();
-            DataContext = new ElectronicsViewModel();
+
+            _viewModel = new ProductViewModel();
+
+            _viewModel.Products.Add(new Product {
+                Name = "iPhone 10S",
+                Description = "Телефон",
+                Cost = 100000
+            }
+            );
+            _viewModel.Products.Add(new Product {
+                Name = "Lenovo M11",
+                Description = "Ноутбук",
+                Cost = 120000
+            }
+            );
+            _viewModel.Products.Add(new Product
+            {
+                Name = "Xiaomi NT",
+                Description = "Планшет",
+                Cost = 75000
+            }
+            );
+            DataContext = _viewModel;
+
+            // Подписка на событие от UserControl!!!!
+            productControl.BackRequested += ProductControl_BackRequested;
+
+            productControl.SwitchRequested += (_, __) =>
+            {
+                new VegetableWindow().Show();
+                this.Close();
+            };
+        }
+
+        private void ProductControl_BackRequested(object? sender, System.EventArgs e)
+        {
+            this.Close();
         }
     }
 }

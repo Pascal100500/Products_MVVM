@@ -26,6 +26,23 @@
                 Height="30"
                 Margin="10,0,0,0"
                 Command="{Binding DeleteProductCommand}"/>
+
+            <Button Content="Назад"
+            Width="140"
+            Height="30"
+            Margin="10,0,0,0"
+            Click="BackButton_Click"/>
+
+            <Button Width="100"
+        Height="30"
+        Margin="10,0,0,0"
+        Click="SwitchButton_Click">
+                <TextBlock Text="{Binding SwitchButtonText, RelativeSource={RelativeSource AncestorType=UserControl}}"
+               TextWrapping="Wrap"
+               TextAlignment="Center"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
+            </Button>
         </StackPanel>
 
     </Grid>

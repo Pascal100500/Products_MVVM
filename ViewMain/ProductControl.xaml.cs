@@ -20,9 +20,29 @@ namespace ViewMain
     /// </summary>
     public partial class ProductControl : UserControl
     {
+        public event EventHandler? BackRequested;
+        public event EventHandler? SwitchRequested;
         public ProductControl()
         {
             InitializeComponent();
+        }
+
+        public string SwitchButtonText
+        {
+            get { return (string)GetValue(SwitchButtonTextProperty); }
+            set { SetValue(SwitchButtonTextProperty, value); }
+        }
+
+        public static readonly DependencyProperty SwitchButtonTextProperty =
+            DependencyProperty.Register("SwitchButtonText", typeof(string), typeof(ProductControl), new PropertyMetadata("Перейти в след. категорию"));
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            BackRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void SwitchButton_Click(object sender, RoutedEventArgs e)
+        {
+            SwitchRequested?.Invoke(this, EventArgs.Empty);
         }
     }
 }

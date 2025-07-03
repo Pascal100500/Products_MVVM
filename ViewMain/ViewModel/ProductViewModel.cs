@@ -24,19 +24,14 @@ namespace ViewMain.ViewModel
             {
                 _selectedProduct = value;
                 OnPropertyChanged(nameof(SelectedProduct));
-                CommandManager.InvalidateRequerySuggested();  // Не обновляется возможность выполнения команды AddProductCommand
-                                                              // Чтобы команда пересчитала своё состояние (и включила/отключила кнопку
-                                                              // Нужно будет потом добавить после каждого OnPropertyChanged
-
+                CommandManager.InvalidateRequerySuggested();  
+                                                              
                 if (_selectedProduct != null)
                 {
                     Name = _selectedProduct.Name;
                     Description = _selectedProduct.Description;
                     Cost = _selectedProduct.Cost;
-
-                    //OnPropertyChanged(nameof(Name));
-                    //OnPropertyChanged(nameof(Description));
-                    //OnPropertyChanged(nameof(Cost));
+                                       
                 }
             }
         }
@@ -96,16 +91,14 @@ namespace ViewMain.ViewModel
         public RelayCommand EditProductCommand { get; set; }
         public RelayCommand DeleteProductCommand { get; set; }
 
-        //Метод для проверки добавления продуктов, убрал, так как кнопка добавления,
-        //даже если команда AddProductCommand активна — соответствующая кнопка оставалась отключённой (спасибо нейросети что подсказала)
-        private bool CanAddProduct(object? parameter)
+          private bool CanAddProduct(object? parameter)
         {
             return !string.IsNullOrWhiteSpace(Name)
                 && !string.IsNullOrWhiteSpace(Description)
                 && Cost > 0;
         }
 
-        //Метод для очитски полей (чтобы убрать дублирование кода)
+        
         private void ClearFields()
         {
             Name = string.Empty;
@@ -124,13 +117,7 @@ namespace ViewMain.ViewModel
 
             Products.Add(product);
             ClearFields();
-
-            //Name = string.Empty;
-            //Description = string.Empty;
-            //Cost = 0;
-            //OnPropertyChanged(nameof(Name));
-            //OnPropertyChanged(nameof(Description));
-            //OnPropertyChanged(nameof(Cost));
+                       
         }
 
         private void EditProduct(object? parameter)
@@ -141,7 +128,6 @@ namespace ViewMain.ViewModel
                 SelectedProduct.Description = Description;
                 SelectedProduct.Cost = Cost;
 
-                // Обновление списка
                 OnPropertyChanged(nameof(Products));
                 CommandManager.InvalidateRequerySuggested();
             }
@@ -155,12 +141,7 @@ namespace ViewMain.ViewModel
                 SelectedProduct = null;
 
                 ClearFields();
-                //Name = string.Empty;
-                //Description = string.Empty;
-                //Cost = 0;
-                //OnPropertyChanged(nameof(Name));
-                //OnPropertyChanged(nameof(Description));
-                //OnPropertyChanged(nameof(Cost));
+               
             }
         }
     }
